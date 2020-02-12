@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 
 # install node and some other items
 RUN apt-get update -q
-RUN apt-get install -qy npm curl iperf ssh htop
+RUN apt-get install -qy npm curl iperf ssh htop ca-certificates
 RUN command -v node >/dev/null 2>&1 || { ln -s /usr/bin/nodejs /usr/bin/node; }
 
 # the node dependencies for our node server app
