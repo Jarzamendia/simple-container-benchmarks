@@ -8,6 +8,7 @@ RUN command -v node >/dev/null 2>&1 || { ln -s /usr/bin/nodejs /usr/bin/node; }
 # the node dependencies for our node server app
 # using caching suggestions per http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 ADD ./server/package.json /tmp/package.json
+RUN npm config set strict-ssl false
 RUN cd /tmp && npm install
 
 # put the shell scripts in place
