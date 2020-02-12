@@ -1,51 +1,51 @@
 #!/bin/bash
 
 # prep the file where we save our output
-touch /simple-container-benchmarks.txt # create it if it doesn't exist
-cat /dev/null > /simple-container-benchmarks.txt # truncate it, if the file has previous content in it
+touch /disk/disk/simple-container-benchmarks.txt # create it if it doesn't exist
+cat /dev/null > /disk/simple-container-benchmarks.txt # truncate it, if the file has previous content in it
 
 
 # system identification
-echo '------------------------------' >> /simple-container-benchmarks.txt
-echo 'Performance benchmarks' >> /simple-container-benchmarks.txt
-echo '------------------------------' >> /simple-container-benchmarks.txt
-echo "dockerhost: $DOCKER_HOST" >> /simple-container-benchmarks.txt
-curl -sS http://$TARGET/ips >> /simple-container-benchmarks.txt || echo 'curl: failed to connect' >> /simple-container-benchmarks.txt
-echo 'date: '$(date) >> /simple-container-benchmarks.txt
+echo '------------------------------' >> /disk/simple-container-benchmarks.txt
+echo 'Performance benchmarks' >> /disk/simple-container-benchmarks.txt
+echo '------------------------------' >> /disk/simple-container-benchmarks.txt
+echo "dockerhost: $DOCKER_HOST" >> /disk/simple-container-benchmarks.txt
+curl -sS http://$TARGET/ips >> /disk/simple-container-benchmarks.txt || echo 'curl: failed to connect' >> /disk/simple-container-benchmarks.txt
+echo 'date: '$(date) >> /disk/simple-container-benchmarks.txt
 
 
 # get disk performance stats
-echo '' >> /simple-container-benchmarks.txt
-echo '------------------------------' >> /simple-container-benchmarks.txt
-echo 'FS write performance' >> /simple-container-benchmarks.txt
-echo '------------------------------' >> /simple-container-benchmarks.txt
+echo '' >> /disk/simple-container-benchmarks.txt
+echo '------------------------------' >> /disk/simple-container-benchmarks.txt
+echo 'FS write performance' >> /disk/simple-container-benchmarks.txt
+echo '------------------------------' >> /disk/simple-container-benchmarks.txt
 COUNTER=0
 while [	 $COUNTER -lt 10 ]; do
-	curl -sS http://$TARGET/disk >> /simple-container-benchmarks.txt || echo 'curl: failed to connect' >> /simple-container-benchmarks.txt
+	curl -sS http://$TARGET/disk >> /disk/simple-container-benchmarks.txt || echo 'curl: failed to connect' >> /disk/simple-container-benchmarks.txt
 	let COUNTER=COUNTER+1
 done
 
 
 
 # get processor performance stats
-echo '' >> /simple-container-benchmarks.txt
-echo '------------------------------' >> /simple-container-benchmarks.txt
-echo 'CPU performance' >> /simple-container-benchmarks.txt
-echo '------------------------------' >> /simple-container-benchmarks.txt
+echo '' >> /disk/simple-container-benchmarks.txt
+echo '------------------------------' >> /disk/simple-container-benchmarks.txt
+echo 'CPU performance' >> /disk/simple-container-benchmarks.txt
+echo '------------------------------' >> /disk/simple-container-benchmarks.txt
 COUNTER=0
 while [	 $COUNTER -lt 10 ]; do
-	curl -sS http://$TARGET/cpu >> /simple-container-benchmarks.txt || echo 'curl: failed to connect' >> /simple-container-benchmarks.txt
+	curl -sS http://$TARGET/cpu >> /disk/simple-container-benchmarks.txt || echo 'curl: failed to connect' >> /disk/simple-container-benchmarks.txt
 	let COUNTER=COUNTER+1
 done
 
 
 
 # get system info
-echo '' >> /simple-container-benchmarks.txt
-echo '------------------------------' >> /simple-container-benchmarks.txt
-echo 'System info' >> /simple-container-benchmarks.txt
-echo '------------------------------' >> /simple-container-benchmarks.txt
-curl -sS http://$TARGET/info >> /simple-container-benchmarks.txt || echo 'curl: failed to connect' >> /simple-container-benchmarks.txt
+echo '' >> /disk/simple-container-benchmarks.txt
+echo '------------------------------' >> /disk/simple-container-benchmarks.txt
+echo 'System info' >> /disk/simple-container-benchmarks.txt
+echo '------------------------------' >> /disk/simple-container-benchmarks.txt
+curl -sS http://$TARGET/info >> /disk/simple-container-benchmarks.txt || echo 'curl: failed to connect' >> /disk/simple-container-benchmarks.txt
 
 # report
-cat /simple-container-benchmarks.txt
+cat /disk/simple-container-benchmarks.txt

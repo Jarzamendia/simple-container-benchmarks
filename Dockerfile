@@ -16,8 +16,12 @@ ADD ./sbin /usr/local/sbin
 # our node server app
 ADD ./server /server
 RUN cp -r /tmp/node_modules /server/.
+RUN mkdir /disk
+
 
 # expose port 80 for the node server
 EXPOSE 80 5001
+
+VOLUME "/disk"
 
 CMD ["/usr/local/sbin/simple-container-benchmarks-init"]
